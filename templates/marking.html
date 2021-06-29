@@ -1,0 +1,89 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>marking</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'csss/marking.css'%}">
+</head>
+<body>
+<script>
+    function color_changer(name,color,others) {
+        console.log(name);
+        var l=document.getElementsByClassName(others);
+        var i;
+        for (i = 0; i < l.length; i++) {
+            l[i].style.opacity = 0.2;
+        }
+        var selected=document.getElementById(name);
+        selected.style.backgroundColor=color;
+        selected.style.opacity=0.9;
+    }
+    var state='0';
+    function fliper() {
+        if(state=='1')
+        {
+             document.body.style.backgroundColor= '#ffffff';
+             state='0';
+             console.log(state);
+        }else
+        {
+             document.body.style.backgroundColor= '#000000';
+             state='1';
+             console.log(state);
+        }
+
+
+    }
+</script>
+<button style="background:green;" id="flip_b" onclick="fliper()">FLIP</button>
+<h1 id="textt" style="color: white"></h1>
+<section class="all">
+    {% for i in data %}
+        <div class="single">
+            <div class="name">
+                {{ i.name }}
+            </div>
+            <div class="rollNo">
+                {{ i.rollNo }}
+            </div>
+
+            <div class="markings">
+                <button onclick="color_changer('present{{ i.rollNo }}','lightgreen','com{{ i.rollNo }}'); attendence_marker('present',{{ i.rollNo }})" id="present{{ i.rollNo }}"class="present com{{ i.rollNo }} " value="present">
+                    PRESENT
+                </button>
+
+               <button onclick="color_changer('absent{{ i.rollNo }}','red','com{{ i.rollNo }}'); attendence_marker('absent',{{ i.rollNo }})" id="absent{{ i.rollNo }}"class="absent com{{ i.rollNo }}"  value="absent">
+                    ABSENT
+                </button>
+                 <button onclick="color_changer('onduty{{ i.rollNo }}','green','com{{ i.rollNo }}') ; attendence_marker('onduty',{{ i.rollNo }})" id="onduty{{ i.rollNo }}"class="onduty com{{ i.rollNo }}" value="onduty">
+                    ONDUTY
+                </button>
+               <button onclick="color_changer('mark{{ i.rollNo }}','yellow','com{{ i.rollNo }}'); attendence_marker('matk',{{ i.rollNo }})" id="mark{{ i.rollNo }}" class="mark com{{ i.rollNo }}"value="mark">
+                    MARK
+                </button>
+            </div>
+
+        </div>
+
+    {% endfor %}
+<form method="get" action="attendence_submit" id="attendence_form">
+    <input type="date" name="date" value="date" id="sk">
+{% for i in data %}
+    <input name="attendence_result" type="hidden" value="none" id="id{{ i.rollNo }}">
+{%  endfor %}
+</form>
+<button onclick="submit_attendence()">submit_attendence</button>
+<script>
+    document.getElementById("date").value=document.getElementById('sk').value
+    function submit_attendence() {
+
+document.getElementById('attendence_form').submit();}
+    function attendence_marker(value_of_attendence,rollNo) {
+document.getElementById('id'+rollNo).value=value_of_attendence;
+}
+
+</script>
+</section>
+</body>
+</html>

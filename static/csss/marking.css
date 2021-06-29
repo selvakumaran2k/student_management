@@ -1,0 +1,47 @@
+.single{
+    width: 95%;
+    height: fit-content;
+    background: #535151;
+    color: white;
+    font-size: 45px;
+    border-radius: 25px;
+    margin: 30px;
+}
+body{
+    background-color: black;
+}
+.single > .name ,.rollNo{
+    display: inline-block;
+    height: fit-content;
+    padding: 30px;
+}
+/**{*/
+/*    border:solid red 1px;*/
+/*}*/
+div.name{
+    width: 400px;
+}div.rollNo{
+    width: 30px;
+ }
+ .markings{
+     display: inline-block;
+     height: fit-content;
+     margin-top: 2px;
+     align-content: center;
+     float: right;
+ }
+ .markings>.absent,.present,.onduty,.mark{
+     width: fit-content;
+     height: max-content;
+     display: inline-block;
+     border-radius: 10px;
+     background: blue;
+     color: white;
+     padding: 20px;
+     margin: 20px;
+     opacity: 0.9;
+     border: none;
+ }
+button{
+    border: solid red 1px;
+}
